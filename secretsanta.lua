@@ -12,14 +12,21 @@ io.write("\nEnter the name of one person in the Secret Santa: ")
 entry = io.read()
 name = entry:match ( "%S+" )
 
+people = {}             -- the people's names in the pool
+alreadysaid = {}        -- a dictionary matching the name to true if said.
+
 i = 1
-people = {}
 while name ~= nil do
-    people[i] = name
-    i = i + 1
     io.write("Write another name: ")
     entry = io.read()
     name = entry:match ( "%S+" )
+    if alreadysaid[name] == true then
+        io.write("You already gave the name " .. name .. ".\n")
+    elseif name ~= nil then
+        people[i] = name
+        alreadysaid[name] = true
+        i = i + 1
+    end
 end
 
 io.write("\n                  -----\n")
